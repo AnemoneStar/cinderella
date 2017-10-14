@@ -33,7 +33,8 @@ while True:
     print(a)
     r = tw.statuses.user_timeline(**a)
     print(r)
-    if len(r) == 0:
+    if len(r) == 1:
+        print("end")
         break
     for tweet in r:
         max_id = tweet["id_str"]
@@ -42,7 +43,7 @@ while True:
                 continue
             if tweet["retweet_count"] != 0:
                 continue
-            if len(tweet.get("entities", {}).get("user_mentions", [])):
+            if len(tweet["full_text"]) and tweet["full_text"][0] == "@":
                 continue
         print(tweet["full_text"])
         if os.environ.get("TWEET_LOG_POST_URL") is not None:
