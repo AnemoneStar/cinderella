@@ -7,7 +7,7 @@ COPY crontab /var/spool/cron/crontabs/root
 COPY requirements.txt /usr/src/app
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY *.py .
 
 # CMD ["sh","-c","crond -l 2 -f"]
 CMD ["python","main.py"]
